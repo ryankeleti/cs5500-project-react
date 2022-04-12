@@ -1,7 +1,20 @@
-import React from "react";
+import React, {useState} from "react";
+import * as sessionService from "../../services/message-session-service";
+import MessageSession from "./message-session"
+
 const Messages = () => {
-  return(
-    <h1>Messages Screen</h1>
-  );
+
+    const [sessions, setSession] = useState([]);
+
+    const findAllSessions = () =>
+        sessionService.findAllSessions()
+            .then(sessions => setSession(sessions));
+
+    /*return (
+        <MessageSession sessions={sessions}/>
+    );*/
+    return (
+        <MessageSession sessions={findAllSessions}/>
+    );
 };
 export default Messages;
