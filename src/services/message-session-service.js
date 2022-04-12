@@ -12,7 +12,7 @@ export const findAllSessions = () =>
         .then(response => response.data);
 
 export const findSessionsByUser = (uid) =>
-    api.get(`${BASE_URL}/api/users/${uid}/sessionss`)
+    api.get(`${BASE_URL}/api/users/${uid}/sessions`)
         .then(response => response.data);
 
 export const findSessionById = (sid) =>
