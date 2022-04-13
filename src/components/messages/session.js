@@ -1,15 +1,21 @@
-import {Link, useNavigate} from "react-router-dom";
+import {Link} from "react-router-dom";
 
 const Session = ({session}) => {
-    const navigate = useNavigate();
+    const sessionItems = (
+        <ul>
+            {
+            session.members.map(member => (
+                <Link to={`/home`}>
+                    <li>{member.firstName}</li>
+                </Link>))
+            }
+        </ul>
+    );
+
     return (
-        <li className="p-2 ttr-tuit list-group-item d-flex rounded-0">
-            <div className="pe-2">
-                {
-                    session.users
-                }
-            </div>
-        </li>
+        <div>
+            {sessionItems}
+        </div>
     );
 }
 export default Session;

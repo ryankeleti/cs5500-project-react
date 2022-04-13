@@ -7,7 +7,8 @@ const MessageSession = ({sessions = [], refreshSessions}) => {
             <ul className="ttr-tuits list-group">
                 {
                     sessions.map && sessions.map(session =>
-                        <Session key={session._id}/>)
+                        <Session key={session._id}
+                        session={session}/>)
                 }
             </ul>
         </div>
