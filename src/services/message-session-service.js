@@ -23,6 +23,10 @@ export const createSession = (messageSession) =>
     api.post(`${SESSIONS_URL}`, messageSession)
         .then(response => response.data);
 
+export const addUserToSession = (sid, inviter, invitee) =>
+    api.put(`${BASE_URL}/api/users/${inviter}/sessions/${sid}/invite/${invitee}`)
+        .then(response => response.data);
+
 export const deleteSession = (sid) =>
     api.delete(`${SESSIONS_URL}/${sid}`)
         .then(response => response.data);
