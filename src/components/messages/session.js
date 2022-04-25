@@ -1,20 +1,18 @@
 import {Link} from "react-router-dom";
 
 const Session = ({session}) => {
-    const sessionItems = (
-        <ul>
+    const sessionInfo = (
+        <Link to={`/session/${session._id}`}>
+            Session with
             {
-            session.members.map(member => (
-                <Link to={`/home`}>
-                    <li>{member.firstName}</li>
-                </Link>))
+                 session.members && session.members.map(member => member.username).join(", ")
             }
-        </ul>
+        </Link>
     );
 
     return (
         <div>
-            {sessionItems}
+            {sessionInfo}
         </div>
     );
 }
