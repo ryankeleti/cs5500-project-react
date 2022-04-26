@@ -11,7 +11,15 @@ const MessageSession = ({session}) => {
   const [profile, setProfile] = useState({});
   const [messages, setMessages] = useState([]);
   const [message, setMessage] = useState('');
+  const [members, setMembers] = useState([]);
   const [invited, setInvited] = useState('');
+
+  const findMembers = () => {
+    if (profile && session) {
+      messageSessionService.findSessionById(session._id)
+        .then(s => setMembers(s.members));
+    }
+  }
 
   const findMessages = () => {
     if (profile && session) {
@@ -34,7 +42,8 @@ const MessageSession = ({session}) => {
       if (invited) {
         userService.findUserByUsername(invited).then(user =>
           messageSessionService.addUserToSession(session._id, profile._id, user._id))
-            .then(() => setInvited(''));
+            .then(() => setInvited(''))
+            .then(findMembers);
       }
     }
   }
@@ -72,15 +81,20 @@ const MessageSession = ({session}) => {
   }, []);
 
   useEffect(findMessages, [profile, session, messages]);
+  useEffect(findMembers, [profile, session, members]);
 
   useInterval(() => {
     findMessages();
   }, 1000 * 2);
 
+  useInterval(() => {
+    findMembers();
+  }, 1000 * 10);
+
   return(
     <div>
       <div className="p-2 w-100">
-        <h2>Users in session: { session.members && session.members.map(member => member.username).join(", ") }</h2>
+        <h2>Users in session: { members && members.map(member => member.username).join(", ") }</h2>
         <textarea onChange={(e) => setInvited(e.target.value)}
                   placeholder="Enter username to add to session"
                   className="w-100 border-0"></textarea>
