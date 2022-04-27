@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import React, {useEffect, useState, useRef} from "react";
 import {HashRouter, Link, Route, Routes, useNavigate, useLocation} from "react-router-dom";
 import * as securityService from "../../services/security-service";
 import * as userService from "../../services/users-service";
@@ -11,7 +11,15 @@ const MessageSession = ({session}) => {
   const [profile, setProfile] = useState({});
   const [messages, setMessages] = useState([]);
   const [message, setMessage] = useState('');
+  const [members, setMembers] = useState([]);
   const [invited, setInvited] = useState('');
+
+  const findMembers = () => {
+    if (profile && session) {
+      messageSessionService.findSessionById(session._id)
+        .then(s => setMembers(s.members));
+    }
+  }
 
   const findMessages = () => {
     if (profile && session) {
@@ -22,17 +30,42 @@ const MessageSession = ({session}) => {
 
   const createMessage = () => {
     if (profile && session) {
-      messageService.createMessage(profile._id, session._id, {message})
-          .then(findMessages);
+      if (message) {
+        messageService.createMessage(profile._id, session._id, {message})
+            .then(findMessages);
+      }
     }
   }
 
   const addUserToSession = () => {
     if (profile && session) {
-      userService.findUserByUsername(invited).then(user =>
-        messageSessionService.addUserToSession(session._id, profile._id, user._id))
-        .then(() => setInvited(''));
+      if (invited) {
+        userService.findUserByUsername(invited).then(user =>
+          messageSessionService.addUserToSession(session._id, profile._id, user._id))
+            .then(() => setInvited(''))
+            .then(findMembers);
+      }
     }
+  }
+
+  /* Sourced from:
+   * https://stackoverflow.com/questions/46140764/polling-api-every-x-seconds-with-react */
+  const useInterval = (callback, delay) => {
+    const savedCallback = useRef();
+
+    useEffect(() => {
+       savedCallback.current = callback;
+    }, [callback]);
+
+    useEffect(() => {
+      function tick() {
+        savedCallback.current();
+      }
+      if (delay !== null) {
+        const id = setInterval(tick, delay);
+        return () => clearInterval(id);
+      }
+    }, [delay]);
   }
 
   useEffect(() => {
@@ -48,6 +81,15 @@ const MessageSession = ({session}) => {
   }, []);
 
   useEffect(findMessages, [profile, session, messages]);
+  useEffect(findMembers, [profile, session, members]);
+
+  useInterval(() => {
+    findMessages();
+  }, 1000 * 2);
+
+  useInterval(() => {
+    findMembers();
+  }, 1000 * 10);
 
   return(
     <div>
