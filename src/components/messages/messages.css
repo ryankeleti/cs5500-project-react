@@ -1,0 +1,44 @@
+.message-received {
+    line-height: 18px;
+    font-size: 15px;
+    padding: 8px;
+    position: relative;
+    margin: 8px 0;
+    max-width: 85%;
+    word-wrap: break-word;
+    z-index: -1;
+    background: #AAB8C2;
+    color: #ffffff;
+    border-radius: 0px 5px 5px 5px;
+    float: left;
+}
+
+.message-sent {
+    line-height: 18px;
+    font-size: 15px;
+    padding: 8px;
+    position: relative;
+    margin: 8px 0;
+    max-width: 85%;
+    word-wrap: break-word;
+    z-index: -1;
+    background: #1DA1F2;
+    color: #ffffff;
+    border-radius: 0px 5px 5px 5px;
+    float: right;
+}
+
+
+
+.conversation .conversation-container {
+    height: calc(100% - 68px);
+    overflow-x: hidden;
+    padding: 0 16px;
+    margin-bottom: 10px;
+}
+
+.conversation .conversation-container:after {
+    content: "";
+    display: table;
+    clear: both;
+}
