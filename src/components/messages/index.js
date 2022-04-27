@@ -20,6 +20,10 @@ const Messages = () => {
        }
     }
 
+    const deleteSession = (sid) =>
+        sessionService.deleteSession(sid)
+            .then(findSessionsByUser)
+
     useEffect(() => {
       async function getProfile() {
         try {
@@ -35,18 +39,25 @@ const Messages = () => {
 
     return (
         <div>
+            <div className="row">
+                <div className="col">
            <a onClick={createSession}
               className={`btn btn-primary rounded-pill fa-pull-right
-                                fw-bold ps-4 pe-4`}>
+                                fw-bold ps-4 pe-4 mb-4`}>
               Create new session
            </a>
+                </div>
+            </div>
+            <div className="row">
            <ul className="ttr-tuits list-group">
                {
                    sessions.map && sessions.map(session =>
                        <Session key={session._id}
-                                session={session}/>)
+                                session={session}
+                       deleteSession={deleteSession}/>)
                }
            </ul>
+            </div>
         </div>
     );
 };
