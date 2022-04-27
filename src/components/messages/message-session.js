@@ -51,15 +51,25 @@ const MessageSession = ({session}) => {
 
   return(
     <div>
+
       <div className="p-2 w-100">
-        <h2>Users in session: { session.members && session.members.map(member => member.username).join(", ") }</h2>
-        <textarea onChange={(e) => setInvited(e.target.value)}
-                  placeholder="Enter username to add to session"
-                  className="w-100 border-0"></textarea>
-        <a onClick={addUserToSession}
-           className={`btn btn-primary rounded-pill fa-pull-right fw-bold ps-4 pe-4`}>
-              Add user to session
-        </a>
+          <h2>Users in session: { session.members && session.members.map(member => member.username).join(", ") }</h2>
+          <textarea onChange={(e) => setInvited(e.target.value)}
+                    placeholder="Enter username to add to session"
+                    className="w-100 border-0"></textarea>
+          <a onClick={addUserToSession}
+             className={`btn btn-primary rounded-pill fa-pull-right fw-bold ps-4 pe-4`}>
+                Add user to session
+          </a>
+      </div>
+      <div>
+
+      </div>
+      <Messages messages={messages}
+                refreshMessages={findMessages}/>
+
+      <div className="p-2 w-100">
+
         <textarea onChange={(e) => setMessage(e.target.value)}
                   placeholder="Enter message."
                   className="w-100 border-0"></textarea>
@@ -79,8 +89,7 @@ const MessageSession = ({session}) => {
           </div>
         </div>
       </div>
-      <Messages messages={messages}
-                refreshMessages={findMessages}/>
+
     </div>
   );
 };
