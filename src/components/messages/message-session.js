@@ -32,7 +32,8 @@ const MessageSession = ({session}) => {
     if (profile && session) {
       if (message) {
         messageService.createMessage(profile._id, session._id, {message})
-            .then(findMessages);
+            .then(findMessages)
+            .then(() => document.getElementById("message-textarea").value = "");
       }
     }
   }
@@ -112,7 +113,8 @@ const MessageSession = ({session}) => {
 
       <div className="p-2 w-100">
 
-        <textarea onChange={(e) => setMessage(e.target.value)}
+        <textarea id="message-textarea"
+                  onChange={(e) => setMessage(e.target.value)}
                   placeholder="Enter message."
                   className="w-100 border-0"></textarea>
         <div className="row">
