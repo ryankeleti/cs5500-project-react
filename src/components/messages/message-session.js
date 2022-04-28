@@ -115,31 +115,39 @@ const MessageSession = ({session}) => {
       <div>
 
       </div>
-      <Messages messages={messages}
-                refreshMessages={findMessages}/>
+      <div className= "page">
 
-      <div className="p-2 w-100">
-
-        <textarea id="message-textarea"
-                  onChange={(e) => setMessage(e.target.value)}
-                  placeholder="Enter message."
-                  className="w-100 border-0"></textarea>
-        <div className="row">
-          <div className="col-10 ttr-font-size-150pc text-primary">
-            <i className="fas fa-portrait me-3"></i>
-            <i className="far fa-gif me-3"></i>
-            <i className="far fa-bar-chart me-3"></i>
-            <i className="far fa-face-smile me-3"></i>
-            <i className="far fa-calendar me-3"></i>
-            <i className="far fa-map-location me-3"></i>
-          </div>
-          <div className="col-2">
-            <a onClick={createMessage}
-               className={`btn btn-primary rounded-pill fa-pull-right
-                           fw-bold ps-4 pe-4`}>Send</a>
-          </div>
-        </div>
       </div>
+      <section className = "chatbox">
+        <section className = "chat-window">
+          <Messages messages={messages}
+                    refreshMessages={findMessages}/>
+
+          <div className="p-2 w-100">
+
+            <textarea onChange={(e) => setMessage(e.target.value)}
+                      placeholder="Enter message."
+                      className="w-100 border-0"></textarea>
+            <div className="row">
+              <div className="col-10 ttr-font-size-150pc text-primary">
+                <i className="fas fa-portrait me-3"></i>
+                <i className="far fa-gif me-3"></i>
+                <i className="far fa-bar-chart me-3"></i>
+                <i className="far fa-face-smile me-3"></i>
+                <i className="far fa-calendar me-3"></i>
+                <i className="far fa-map-location me-3"></i>
+              </div>
+              <div className="col-2">
+                <a onClick={createMessage}
+                   className={`btn btn-primary rounded-pill fa-pull-right
+                               fw-bold ps-4 pe-4`}>Send</a>
+              </div>
+            </div>
+          </div>
+        </section>
+      </section>
+
+
 
     </div>
   );
