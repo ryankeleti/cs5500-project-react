@@ -1,9 +1,11 @@
 .message-received {
+    margin-left: 10px;
+    margin-bottom: 10px;
     line-height: 18px;
     font-size: 15px;
     padding: 8px;
     position: relative;
-    margin: 8px 0;
+    /*margin: 8px 0;*/
     max-width: 85%;
     word-wrap: break-word;
     z-index: -1;
@@ -14,11 +16,13 @@
 }
 
 .message-sent {
+    margin-left: 10px;
+    margin-bottom: 10px;
     line-height: 18px;
     font-size: 15px;
     padding: 8px;
     position: relative;
-    margin: 8px 0;
+    /*margin: 8px 0;*/
     max-width: 85%;
     word-wrap: break-word;
     z-index: -1;
@@ -41,4 +45,61 @@
     content: "";
     display: table;
     clear: both;
+}
+
+.page {
+    width: 100%;
+    height: 20%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.box {
+    width: 100%;
+    height: 20%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+body {
+    height: 100%;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    font-family: sans-serif;
+    /*background: #1c1e22;*/
+}
+body {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+::-webkit-scrollbar {
+    width: 4px;
+}
+::-webkit-scrollbar-thumb {
+    /*background-color: #4c4c6a;*/
+    border-radius: 2px;
+}
+.chatbox {
+    margin : 20px;
+    margin-left: auto;
+    width: 580px;
+    height: 500px;
+    max-height: 500px;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    box-shadow: 0 0 4px rgba(0,0,0,.14),0 4px 8px rgba(0,0,0,.28);
+    /*border: 2px solid grey;*/
+}
+.chat-window {
+    flex: auto;
+    max-height: calc(100% - 60px);
+    overflow: auto;
+    border: #1a1e21;
 }
