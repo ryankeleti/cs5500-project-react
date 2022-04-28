@@ -41,8 +41,15 @@ const MessageSession = ({session}) => {
   const addUserToSession = () => {
     if (profile && session) {
       if (invited) {
-        userService.findUserByUsername(invited).then(user =>
-          messageSessionService.addUserToSession(session._id, profile._id, user._id))
+        userService.findUserByUsername(invited)
+            .then(user =>{
+              if(user!=null){
+                messageSessionService.addUserToSession(session._id, profile._id, user._id)
+              }
+             else{
+               alert("No such user");
+              }
+            })
             .then(() => setInvited(''))
             .then(findMembers);
       }
