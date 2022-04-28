@@ -32,7 +32,8 @@ const MessageSession = ({session}) => {
     if (profile && session) {
       if (message) {
         messageService.createMessage(profile._id, session._id, {message})
-            .then(findMessages);
+            .then(findMessages)
+            .then(() => document.getElementById("message-textarea").value = "");
       }
     }
   }

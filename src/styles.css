@@ -28,7 +28,9 @@ body {
 .ttr-width-150px {
     width: 150px;
 }
-
+.ttr-width-70px {
+    width: 70px;
+}
 .left-0 {
     left: 0px;
 }
@@ -43,4 +45,8 @@ body {
 
 .ttr-z-index-1 {
     z-index: 1;
+}
+
+.margin-right-10{
+    margin-right: 10px;
 }
