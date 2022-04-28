@@ -34,29 +34,27 @@ const Message = ({message}) => {
 
   return(
 
-          <div className={"conversation"}>
-            <div className={"conversation-container"}>
-              {
-                profile._id === message.sender._id ? (
-                    <div className="message-sent">
-                      <div>
-                        { message.message }
-                        <br/>
-                        <em> Sent by { message.sender.username } at { getDate() } </em>
-                      </div>
-                    </div> ) :
-                    (
-                    <div className="message-received">
-                      <div>
-                        { message.message }
-                        <br/>
-                        <em> Sent by { message.sender.username } at { getDate() }</em>
-                      </div>
-                 </div>)
-              }
+                    <div className={"conversation-container"}>
+                      {
+                        profile._id === message.sender._id ? (
+                            <div className="message-sent">
+                              <div>
+                                { message.message }
+                                <br/>
+                                <em> Sent by { message.sender.username } at { getDate() } </em>
+                              </div>
+                            </div> ) :
+                            (
+                            <div className="message-received">
+                              <div>
+                                { message.message }
+                                <br/>
+                                <em> Sent by { message.sender.username } at { getDate() }</em>
+                              </div>
+                         </div>)
+                      }
 
-            </div>
-          </div>
+                    </div>
 
 
   );
