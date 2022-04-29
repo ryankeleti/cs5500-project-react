@@ -10,7 +10,7 @@ export const Login = () => {
         service.login(loginUser)
             .then((user) => navigate('/profile/mytuits'))
             .catch(e =>{
-                if(e=="Error: Request failed with status code 403"){
+                if(e==="Error: Request failed with status code 403"){
                     alert("Invalid credentials")
                 }
                 else{

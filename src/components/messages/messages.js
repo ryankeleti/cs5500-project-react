@@ -13,7 +13,8 @@ const Messages = ({messages = [], refreshMessages}) => {
             {
               messages.map && messages.map(message =>
                   <Message key={message._id}
-                           message={message}/>)
+                           message={message}
+                           deleteMessage={deleteMessage}/>)
             }
           </ul>
         </div>
