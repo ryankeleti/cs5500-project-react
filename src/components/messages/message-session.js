@@ -118,9 +118,12 @@ const MessageSession = ({session}) => {
 
           <div className="p-2 w-100">
 
-            <textarea onChange={(e) => setMessage(e.target.value)}
+            <textarea id = "message-textarea"
+                      onChange={(e) => setMessage(e.target.value)}
                       placeholder="Enter message."
-                      className="w-100 border-0"></textarea>
+                      className="w-100 border-0">
+
+            </textarea>
             <div className="row">
               <div className="col-10 ttr-font-size-150pc text-primary">
                 <i className="fas fa-portrait me-3"></i>
