@@ -35,7 +35,8 @@ const MessageSession = ({session}) => {
       if (message) {
         messageService.createMessage(profile._id, session._id, {message})
             .then(findMessages)
-            .then(() => document.getElementById("message-textarea").value = "");
+            .then(() => document.getElementById("message-textarea").value = "")
+            .then(scrollBottom);
       }
     }
   }
@@ -62,10 +63,6 @@ const MessageSession = ({session}) => {
     }
   }
 
-  const scrollBottom = () => {
-    let messages = document.getElementById("messages");
-    messages.scrollTop = messages.scrollHeight + 100;
-  }
 
   /* Sourced from:
    * https://stackoverflow.com/questions/46140764/polling-api-every-x-seconds-with-react */
@@ -99,7 +96,12 @@ const MessageSession = ({session}) => {
     getProfile();
   }, []);
 
-  useEffect(scrollBottom, [messages]);
+  const scrollBottom = () => {
+    let messages = document.getElementById("messages");
+    messages.scrollTop = messages.scrollHeight + 100;
+  }
+
+  useEffect(scrollBottom, []);
   useEffect(findMessages, [profile, session, messages]);
   useEffect(findMembers, [profile, session, members]);
 

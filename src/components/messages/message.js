@@ -4,13 +4,11 @@ import "./messages.css";
 import * as securityService from "../../services/security-service";
 import profile from "../profile";
 
-const Message = ({message}) => {
+const Message = ({message, deleteMessage}) => {
   const navigate = useNavigate();
   const [profile, setProfile] = useState({});
 
-  // Simplify?
   const getDate = () => {
-
     const date = new Date(message.timestamp);
     const hours = date.getHours();
     const mins = date.getMinutes().toString().padStart(2, '0');
@@ -20,44 +18,46 @@ const Message = ({message}) => {
     return `${hours}:${mins} on ${year}-${month}-${day}`;
   }
 
-    useEffect(() => {
-        async function getProfile() {
-            try {
-                const user = await securityService.profile();
-                setProfile(user);
-            } catch (e) {
-                navigate('/login');
-            }
-        }
-        getProfile();
-    }, []);
+  useEffect(() => {
+    async function getProfile() {
+      try {
+        const user = await securityService.profile();
+        setProfile(user);
+      } catch (e) {
+        navigate('/login');
+      }
+    }
+    getProfile();
+  }, []);
 
   return(
-
-                    <div className={"conversation-container"}>
-                      {
-                        profile._id === message.sender._id ? (
-                            <div className="message-sent">
-                              <div>
-                                { message.message }
-                                <br/>
-                                <em> Sent by { message.sender.username } at { getDate() } </em>
-                              </div>
-                            </div> ) :
-                            (
-                            <div className="message-received">
-                              <div>
-                                { message.message }
-                                <br/>
-                                <em> Sent by { message.sender.username } at { getDate() }</em>
-                              </div>
-                         </div>)
-                      }
-
-                    </div>
-
-
-  );
+    <div className={"conversation-container"}>
+      {
+        profile &&
+        profile._id === message.sender._id ? (
+        <div>
+          <div className="message-sent">
+            <div>
+              { message.message }
+              <br/>
+              <em>Sent by { message.sender.username } at { getDate() }</em>
+            </div>
+          </div>
+          <button onClick={(e) => deleteMessage(message._id)}
+                  className="btn btn-link fa-pull-right shadow-none">
+            <i className="fas fa-trash" style={{color: "red"}}></i>
+          </button>
+        </div>
+          ) : (
+          <div className="message-received">
+            <div>
+              { message.message }
+              <br/>
+              <em>Sent by { message.sender.username } at { getDate() }</em>
+            </div>
+          </div> )
+      }
+   </div>);
 }
 
 export default Message;
