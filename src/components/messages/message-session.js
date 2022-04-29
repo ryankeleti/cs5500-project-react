@@ -49,6 +49,11 @@ const MessageSession = ({session}) => {
     }
   }
 
+  const scrollBottom = () => {
+    let messages = document.getElementById("messages");
+    messages.scrollTop = messages.scrollHeight + 100;
+  }
+
   /* Sourced from:
    * https://stackoverflow.com/questions/46140764/polling-api-every-x-seconds-with-react */
   const useInterval = (callback, delay) => {
@@ -81,6 +86,7 @@ const MessageSession = ({session}) => {
     getProfile();
   }, []);
 
+  useEffect(scrollBottom, [messages]);
   useEffect(findMessages, [profile, session, messages]);
   useEffect(findMembers, [profile, session, members]);
 
@@ -106,7 +112,7 @@ const MessageSession = ({session}) => {
       <div className="page">
       </div>
       <section className="chatbox">
-        <section className="chat-window">
+        <section id="messages" className="chat-window">
           <Messages messages={messages}
                     refreshMessages={findMessages}/>
         </section>
