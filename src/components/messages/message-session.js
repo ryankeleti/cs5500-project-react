@@ -115,7 +115,7 @@ const MessageSession = ({session}) => {
         <section className = "chat-window">
           <Messages messages={messages}
                     refreshMessages={findMessages}/>
-
+        </section>
           <div className="p-2 w-100">
 
             <textarea id = "message-textarea"
@@ -140,11 +140,7 @@ const MessageSession = ({session}) => {
               </div>
             </div>
           </div>
-        </section>
       </section>
-
-
-
     </div>
   );
 };
